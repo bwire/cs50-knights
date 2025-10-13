@@ -34,7 +34,14 @@ knowledge1 = And(
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    # TODO
+    Or(AKnight, AKnave),
+    Not(And(AKnight, AKnave)),
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),
+    Implication(AKnight, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
+    Implication(AKnave, Or(And(AKnight, BKnave), And(AKnave, BKnight))),
+    Implication(BKnight, Or(And(AKnight, BKnave), And(AKnave, BKnight))),
+    Implication(BKnave, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
 )
 
 # Puzzle 3
@@ -52,7 +59,7 @@ def main():
     puzzles = [
         ("Puzzle 0", knowledge0),
         ("Puzzle 1", knowledge1),
-        # ("Puzzle 2", knowledge2),
+        ("Puzzle 2", knowledge2),
         # ("Puzzle 3", knowledge3)
     ]
     for puzzle, knowledge in puzzles:
